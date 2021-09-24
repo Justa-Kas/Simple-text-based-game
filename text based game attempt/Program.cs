@@ -44,6 +44,7 @@ namespace text_based_game_attempt
                 }
                 else if (action.ToLower() == ("ff"))
                 {
+                    maxHealth = (int)(lvl * 6.5 + 5);
                     if (tooMuchFood == 3)
                     {
                         Console.WriteLine("You've cleared out the place. Go fight, explore,or craft something before you can eat again.");
@@ -56,20 +57,20 @@ namespace text_based_game_attempt
                     enemyGen = rand.Next(0, 10);
                     if (enemyGen <= 4)
                     {
-                        Console.WriteLine("You found some berries! Health restored by 5 points.");
-                        health += 6;
+                        Console.WriteLine("You found some berries! Health restored by "+(int)(maxHealth/3)+" points.");
+                        health += (int)(maxHealth/3);
                         tooMuchFood++;
                     }
                     else if (enemyGen == 5)
                     {
-                        Console.WriteLine("You found some leftovers from a recent hunt and steal as much as you can. Health increased by 20 points.");
-                        health += 20;
+                        Console.WriteLine("You found some leftovers from a recent hunt and steal as much as you can. Health increased by "+(int)(maxHealth*.4)+" points.");
+                        health += (int)(maxHealth*.4);
                         tooMuchFood++;
                     }
                     else if (enemyGen <= 8)
                     {
-                        Console.WriteLine("You found a couple crickets. They're supposed to be good for protein, right? Health restored by 3 points.");
-                        health += 3;
+                        Console.WriteLine("You found a couple crickets. They're supposed to be good for protein, right? Health restored by "+(int)(maxHealth/5) +" points.");
+                        health += (int)(maxHealth/5);
                         tooMuchFood++;
                     }
                     else
@@ -104,49 +105,49 @@ namespace text_based_game_attempt
                         enHealth = 12;
                         enDamage = 5;
                         enName = "Fur Ball";
-                        lvlMult = 0.45 - lvl * .01;
+                        lvlMult = 0.3 - lvl * .01;
                     }
                     else if (setEnemy == 3)
                     {
                         enHealth = 25;
                         enDamage = 13;
                         enName = "Small Fox";
-                        lvlMult = .70 - lvl * .01;
+                        lvlMult = .4 - lvl * .01;
                     }
                     else if (setEnemy == 4)
                     {
                         enHealth = 20;
                         enDamage = 38;
                         enName = "snake";
-                        lvlMult = 0.85 - lvl * .01;
+                        lvlMult = 0.65 - lvl * .01;
                     }
                     else if (setEnemy == 5)
                     {
                         enHealth = 57;
                         enDamage = 29;
                         enName = "Lone Coyote";
-                        lvlMult = 1.5 - lvl * .01;
+                        lvlMult = 1 - lvl * .01;
                     }
                     else if (setEnemy == 6)
                     {
                         enHealth = 87;
                         enDamage = 69;
                         enName = "wild boar";
-                        lvlMult = 2 - lvl * .01;
+                        lvlMult = 1.5 - lvl * .04;
                     }
                     else if (setEnemy == 7)
                     {
                         enHealth = 115;
                         enDamage = 70;
                         enName = "Shadowy Figure";
-                        lvlMult = 4 - lvl * .01;
+                        lvlMult = 3 - lvl * .01;
                     }
                     else
                     {
                         enHealth = 200;
                         enDamage = 125;
                         enName = "Shadowy Set";
-                        lvlMult = 5 - lvl * .01;
+                        lvlMult = 4 - lvl * .01;
                     }
 
                     Console.WriteLine("You've stumbled across a " + enName + ". You can either fight it by typing \"a\" or try to flee by typing \"flee\". If you fail, it will attack you. You have " + health + " health.");
@@ -279,7 +280,7 @@ namespace text_based_game_attempt
                     else if (armor == "Stick guard") { nextArm = "Rock Steady" ; reqVine = 24; reqStick = 19; reqRock = 28; }
                     else if (armor == "Rock Steady") { nextArm = "Heavy stone armor"; reqVine = 50; reqStick = 40; reqRock = 60; }
                     else if(armor=="Heavy stone armor"){ Console.WriteLine("You already have the best armor."); }
-                    Console.WriteLine("You currently have " + armor + " equipped. You currently have " + rocks + " rocks, " + vine + " vine, and " + sticks + " sticks. To make the " + nextArm + " you need " + reqStick + " sticks, " + reqRock + " rocks, and " + reqVine + " vines. To create this weapon, type create, otherwise, type cancel.");
+                    Console.WriteLine("You currently have " + armor + " equipped. You currently have " + rocks + " rocks, " + vine + " vine, and " + sticks + " sticks. To make the " + nextArm + " you need " + reqStick + " sticks, " + reqRock + " rocks, and " + reqVine + " vines. To create this armor, type create, otherwise, type cancel.");
                     do
                     {
                         {
@@ -288,33 +289,33 @@ namespace text_based_game_attempt
                             {
                                 if ((sticks >= reqStick) && (rocks >= reqRock) && (vine >= reqVine))
                                 {
-                                    Console.WriteLine("Congrats, you were able to make the new weapon. Damage has been increased so get back to killing.");
+                                    Console.WriteLine("Congrats, you were able to make the new armor. Resistance to damage has been increased so get back to killing.");
                                     armor = nextArm;
                                     if (armor == "Viney chainmail")
                                     {
-                                        defense = (int)(lvl * .1);
+                                        defense = (int)(lvl * .1)+1;
                                         keepItG = false;
 
                                     }
-                                    else if (armor == "Solid axe")
+                                    else if (armor == "Stick guard")
                                     {
-                                        defense = (int)(lvl * .2);
+                                        defense = (int)(lvl * .2)+1;
                                         keepItG = false;
                                     }
-                                    else if (armor == "Crude sword")
+                                    else if (armor == "Rock Steady")
                                     {
-                                        defense = (int)(lvl * .3);
+                                        defense = (int)(lvl * .3)+1;
                                         keepItG = false;
                                     }
-                                    else if (armor == "Refined stone sword")
+                                    else if (armor == "Heavy stone armor")
                                     {
-                                        defense = (int)(lvl * .4);
+                                        defense = (int)(lvl * .4)+1;
                                         keepItG = false;
                                     }
                                 }
                                 else
                                 {
-                                    Console.WriteLine("You don't have enough materials to build this weapon. Explore to get more materials.");
+                                    Console.WriteLine("You don't have enough materials to build this armor. Explore to get more materials.");
                                     keepItG = false;
                                 }
                             }
@@ -359,7 +360,7 @@ namespace text_based_game_attempt
                         }
 
                     }
-                    else if (lvl < 20)
+                    else if (lvl >= 10)
                     {
                         enemyGen = rand.Next(0, 20);
                         if (enemyGen <= 4)
