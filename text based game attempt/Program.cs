@@ -44,11 +44,11 @@ namespace text_based_game_attempt
                 }
                 else if (action.ToLower() == ("ff"))
                 {
-                    maxHealth = (int)(lvl * 6.5 + 5);
-                    if (tooMuchFood == 3)
+                    maxHealth = (int)lvl * 6 + 5;
+                    if (tooMuchFood >= 3)
                     {
                         Console.WriteLine("You've cleared out the place. Go fight, explore,or craft something before you can eat again.");
-                    }
+                    } else{
                     if (health >= maxHealth)
                     {
                         health = maxHealth;
@@ -84,6 +84,7 @@ namespace text_based_game_attempt
                         Console.WriteLine("You've maxed out your health. You're ready to take on just about any challenge! You have " + health + " health.");
 
                     }
+                }
                 }
                 else if (action.ToLower() == ("f"))
                 {
@@ -195,7 +196,12 @@ namespace text_based_game_attempt
                             }
                             else
                             {
-                                Console.WriteLine("You failed to get away. The " + enName + " flailed on you you for " + enDamage + " You have " + (health - enDamage) + " health");
+                              health -= enDamage;
+                                Console.WriteLine("You failed to get away. The " + enName + " flailed on you you for " + enDamage + " You have " + health + " health");
+                                if(health<=0){
+                                   Console.WriteLine("You've been killed by the " + enName + ". Better luck next time.");
+                                search = false;
+                                }
                             }
                         }
 
